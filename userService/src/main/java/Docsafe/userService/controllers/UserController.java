@@ -39,11 +39,6 @@ public class UserController {
         return "normalSignup";
     }
 
-    // Validation method to check if userID is unique
-    private boolean isUserIdUnique(String userID) {
-        User user = userService.findByUserID(userID);
-        return user == null;
-    }
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(@Valid @ModelAttribute User user, BindingResult result, Model model){
@@ -52,9 +47,10 @@ public class UserController {
             model.addAttribute("user", user);
             return "normalSignup";
         } else {
+
             // Validate userID uniqueness before saving the user
-            if (!isUserIdUnique(user.getUserID())) {
-                result.rejectValue("userID", "Duplicate.user.userID");
+            if (!userService.isUserIdUnique(user.getUserID())) {
+                result.rejectValue("userID", "Duplicate.user.userID", "User ID already exists. Please enter a different User ID.");
                 logger.info("Duplicate User ID Found ! Feedback given to user");
                 model.addAttribute("user", user);
                 return "normalSignup";

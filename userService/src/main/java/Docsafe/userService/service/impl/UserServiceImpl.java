@@ -49,40 +49,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(String userID) {
-        return false;
-    }
-
+    public boolean updateUser(String userID) { return false; }
 
 
     @Override
-    public User findByUserID(String userId) {
+    public User findByUserID(String userId) { return  userRepository.findByUserID(userId); }
 
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<User> cq = cb.createQuery(User.class);
-//            Root<User> from = cq.from(User.class);
-//            Predicate userIdPredicate = cb.equal(from.get("userID"), userId);
-//            cq.where(userIdPredicate);
-//
-//            TypedQuery<User> query = em.createQuery(cq);
-//
-//            return query.getResultList();
-//        }
-//        catch (Exception e){
-//            System.out.println("no user found");
-//            return Collections.EMPTY_LIST;
-//        }
+    @Override
+    public boolean isUserIdUnique(String userID) {
+        User user = this.findByUserID(userID);
+        return user == null;
+    }
+
+    public boolean isUserValid(User user){
 
 
-                 return  userRepository.findByUserID(userId);
-
-//                if(user == null){
-//            System.out.println("no user found");
-//            return true;
-//            }
-//
-//            return false;
 
     }
 

@@ -23,5 +23,7 @@ public interface UserService {
 
     User findByUserID(String userId);
 
+    boolean isUserIdUnique(String userID);
+
 
 }
