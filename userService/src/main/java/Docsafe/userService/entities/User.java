@@ -1,8 +1,10 @@
 package Docsafe.userService.entities;
 
+import Docsafe.userService.validation.userValidation.contact.ValidateContact;
 import Docsafe.userService.validation.userValidation.docId.ValidateDocID;
 import Docsafe.userService.validation.userValidation.id.ValidateUserId;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -13,18 +15,19 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private long ID;
     @NotNull
     @Column
-    @ValidateUserId
+//    @ValidateUserId
     private String userID;
     @Column
     @NotNull
     private String password;
     @Column
     @NotNull
+    @Email(message = "Email Not Valid")
     private String email;
     @Column
     @NotNull
@@ -32,6 +35,7 @@ public class User {
     private String docID;
     @Column
     @NotNull
+    @ValidateContact
     private String phone;
 
     public long getID() {

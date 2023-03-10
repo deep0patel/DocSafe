@@ -2,7 +2,6 @@ package Docsafe.userService.validation.userValidation.contact;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-
 import java.lang.annotation.*;
 
 @Documented
@@ -11,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidateContact {
 
-    public String message() default "${user.contact.NotValid.default.message}";
+    public String message() default "{user.contact.NotValid.default.message}";
 
     // Contact Not Valid. Please use +1 111-111-1111 format
 

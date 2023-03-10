@@ -1,10 +1,13 @@
 package Docsafe.userService.service;
 
 import Docsafe.userService.entities.User;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
+@Service
 public interface UserService {
 
     User saveUser(User user);
@@ -17,7 +20,8 @@ public interface UserService {
 
     boolean updateUser(String ID);
 
-    List<User> findByUserID(String userId);
+
+    User findByUserID(String userId);
 
 
 }

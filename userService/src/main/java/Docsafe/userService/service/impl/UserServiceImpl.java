@@ -5,19 +5,14 @@ import Docsafe.userService.exception.ResourceNotFoundException;
 import Docsafe.userService.repositories.UserRepository;
 import Docsafe.userService.service.UserService;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
 @Service
-@Component("userService")
 public class UserServiceImpl implements UserService {
 
 
@@ -31,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(@Valid User user) {
         return userRepository.save(user);
     }
 
@@ -58,18 +53,36 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+
+
     @Override
-    public List<User> findByUserID(String userId) {
+    public User findByUserID(String userId) {
 
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> from = cq.from(User.class);
-        Predicate userIdPredicate = cb.equal(from.get("userID"  ), userId);
-        cq.where(userIdPredicate);
+//        try {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<User> cq = cb.createQuery(User.class);
+//            Root<User> from = cq.from(User.class);
+//            Predicate userIdPredicate = cb.equal(from.get("userID"), userId);
+//            cq.where(userIdPredicate);
+//
+//            TypedQuery<User> query = em.createQuery(cq);
+//
+//            return query.getResultList();
+//        }
+//        catch (Exception e){
+//            System.out.println("no user found");
+//            return Collections.EMPTY_LIST;
+//        }
 
-        TypedQuery<User> query = em.createQuery(cq);
 
-        return query.getResultList();
+                 return  userRepository.findByUserID(userId);
+
+//                if(user == null){
+//            System.out.println("no user found");
+//            return true;
+//            }
+//
+//            return false;
 
     }
 
