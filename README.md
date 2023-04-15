@@ -16,11 +16,11 @@ AWS S3 account
 
 1. Clone the repository
 
-git clone https://github.com/[your-github-username]/[project-name].git
+git clone https://github.com/deep0patel/DocSafe.git
 
 2. Navigate to the project directory
 
-cd [project-name]
+cd userService
 
 3. Build the project
 
